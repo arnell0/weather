@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './App.css'
 import {exampleData} from './getData'
+import {API_KEY} from './secrets'
 
 export default function App() {
   const [data, setData] = useState(exampleData)
@@ -16,13 +17,14 @@ export default function App() {
     fetch("https://community-open-weather-map.p.rapidapi.com/weather?q=Uppsala%2Cse&lang=en&units=%22metric%22", {
       "method": "GET",
       "headers": {
-        "x-rapidapi-key": "5a380c6890msh9dc760c861baa4ap12673djsnb7a8195b3c4d",
+        "x-rapidapi-key": API_KEY,
         "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
       }
     })
     .then(response => response.json())
     .then(response => {
         setData(response)
+        console.log(response)
     })
     .catch(err => {
       console.error(err)
