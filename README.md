@@ -5,9 +5,12 @@ A simple page for viewing the weather.
 ## Todo
 
 - <s>create function for fetching cyrrent weather data from freemium API</s>
+
   API used https://rapidapi.com/community/api/open-weather-map
   notes: respones looked weird at first glance, because they use different units then what we "non science people" asume. Such as Kelvin instead of Celsius for temperatur.
+
   - convert units
+
 - display a little prettier
 - design the layout
 

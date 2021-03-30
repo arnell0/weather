@@ -7,16 +7,29 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-  background-color: #282c34;
-  min-height: 100vh;
+.flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-color {
   color: #61dafb;
+}
+
+.App-wrapper {
+  background-color: #282c34;
+  min-height: 100vh;
+  max-width: 100vw;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  overflow-x: hidden;
+}
+
+.App-header {
+  cursor: pointer;
+}
+
+.App-data {
 }

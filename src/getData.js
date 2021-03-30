@@ -17,8 +17,8 @@ export const exampleData = {
     "feels_like": 277.98,
     "temp_min": 283.15,
     "temp_max": 284.26,
-    "pressure": 1007,
-    "humidity": 82
+    "pressure": 1007, // hpa
+    "humidity": 82 // %
   },
   "visibility": 10000,
   "wind": {
