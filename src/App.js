@@ -26,7 +26,7 @@ export default function App() {
         <p>Humidity: {data.main.humidity}%</p>
         <br/>
         <p>Wind speed: {data.wind.speed}m/s</p>
-        <p>Direction: {data.wind.deg}°</p>
+        <p>Direction: {data.wind.deg}</p>
 
         {/* <>{JSON.stringify(data.main)}</>
         <>{JSON.stringify(data.wind)}</> */}
@@ -65,7 +65,11 @@ export default function App() {
     newData.main.temp_min = Math.round(newData.main.temp_min - kOffset)
     newData.main.temp_max = Math.round(newData.main.temp_max - kOffset)
 
-
+    // Convert degrees into direction
+    const directions = ["North", "North-West", "West", "South-West", "South", "South-East", "East", "North-East"]
+    var {deg} = {...newData.wind}
+    var index = Math.round(((deg %= 360) < 0 ? deg + 360 : deg) / 45) % 8
+    newData.wind.deg = directions[index]
     
     setData(newData)
   }
