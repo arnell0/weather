@@ -1,0 +1,42 @@
+.SearchBar {
+  position: relative;
+}
+
+.SearchBar__form {
+}
+.SearchBar__input {
+  height: 20px;
+  color: white;
+  font-size: 30px;
+  background-color: #282c34;
+  border: none;
+  border-bottom: 2px solid white;
+  padding: 10px;
+}
+.SearchBar__input:focus {
+  border-bottom: 2px solid #61dafb;
+  transition: border-bottom 0.5s;
+  outline: none;
+}
+
+.SearchIcon {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+.autoComplete {
+  position: absolute;
+  top: 20;
+  color: white;
+  padding: 10px;
+}
+.autoComplete__item {
+  font-size: 30px;
+}
+.autoComplete__item--active {
+  color: #61dafb;
+  padding-left: 5px;
+  transition: color 0.3s;
+  transition: padding-left 0.3s;
+}

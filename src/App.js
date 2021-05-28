@@ -1,76 +1,51 @@
 import React, {useState} from 'react'
+import {_data} from './data'
+import SearchBar from './SearchBar'
+import CityCard from './CityCard'
 import './App.css'
-import {exampleData} from './getData'
-import {API_KEY} from './secrets'
+import { createClient } from '@supabase/supabase-js'
+
 
 export default function App() {
-  const [data, setData] = useState(exampleData)
+  const [active, setActive] = useState(false)
+  const [data, setData] = useState()
+  const supabase = createClient('https://wfapkikzcykkjzxihggu.supabase.co', process.env.REACT_APP_SUPABASE_KEY)
 
   return (
-    <div className="App-wrapper flex-center">
-      <div className="App-header flex-center" onClick={() => getData()}>
-        Get &nbsp; <div className="App-color">weather</div>
+    <div className="App">
+      <div className={`App__search ${active ? "App__search--active" : ""}`}>
+        <SearchBar supabase={supabase} onSubmit={handleSearch} active={active} />      
+      </div>      
+      <div className={`App__cities ${active ? "App__cities--active" : ""}`}>
+        {data && <CityCard onClose={() => setActive(false)} data={data} />}
       </div>
 
-      <div className="App-data">
-        <p>Weather in {data.name}</p>
-        <p>{data.weather[0].main}</p>
-        <p>{data.weather[0].description}</p>
-        <br/>
-        <p>Temperature: {data.main.temp}°C</p>
-        <p>Feels like: {data.main.feels_like}°C</p>
-        <p>Max: {data.main.temp_max}°C</p>
-        <p>Min: {data.main.temp_min}°C</p>
-        <br/>
-        <p>Preassure: {data.main.pressure}hpa</p>
-        <p>Humidity: {data.main.humidity}%</p>
-        <br/>
-        <p>Wind speed: {data.wind.speed}m/s</p>
-        <p>Direction: {data.wind.deg}</p>
-
-        {/* <>{JSON.stringify(data.main)}</>
-        <>{JSON.stringify(data.wind)}</> */}
-
-      </div>      
     </div>
   )
 
-  function getData () {
-    // changeUnits(data)
-    fetch("https://community-open-weather-map.p.rapidapi.com/weather?q=Uppsala%2Cse&lang=en&units=%22metric%22", {
+  function handleSearch(searchTerm) {
+    setActive(true)
+    getData(searchTerm)
+    // setData(_data)
+  }
+
+  function getData(searchTerm) {
+    let url = `https://api.therainery.com/forecast/weather?city=${searchTerm}`
+    let key = "fzsdZcfoX960LtVFNBkc26qdpohxk4kh3VZvV8T8"
+    fetch(url, {
       "method": "GET",
       "headers": {
-        "x-rapidapi-key": API_KEY,
-        "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
+        "x-api-key": key,
       }
     })
     .then(response => response.json())
     .then(response => {
-        console.log(response)
-        changeUnits(response)
+        setData(response)
+        console.log(response.meta.requestsRemaining)
+
     })
     .catch(err => {
       console.error(err)
     })
-  }
-
-  function changeUnits (response) {
-    const newData = {... response}
-
-    // Temperatur Kelvin to Celsius (K - 273.15)
-    const kOffset = 273.15
-
-    newData.main.temp = Math.round(newData.main.temp - kOffset)
-    newData.main.feels_like = Math.round(newData.main.feels_like - kOffset)
-    newData.main.temp_min = Math.round(newData.main.temp_min - kOffset)
-    newData.main.temp_max = Math.round(newData.main.temp_max - kOffset)
-
-    // Convert degrees into direction
-    const directions = ["North", "North-West", "West", "South-West", "South", "South-East", "East", "North-East"]
-    var {deg} = {...newData.wind}
-    var index = Math.round(((deg %= 360) < 0 ? deg + 360 : deg) / 45) % 8
-    newData.wind.deg = directions[index]
-    
-    setData(newData)
   }
 }

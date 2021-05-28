@@ -1,0 +1,77 @@
+.CityCard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: inset;
+}
+.CityCard__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.CityCard__today {
+  text-align: center;
+  margin: 20px 0;
+}
+.today__icon {
+  width: 100px;
+}
+.today__desc {
+  font-size: 20px;
+  margin: 10px 0;
+}
+.today__temp {
+  font-size: 32px;
+}
+.today__extra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+.today__extra--img {
+  display: flex;
+  align-items: center;
+}
+.today__extra--img:first-child {
+  margin-right: 20px;
+}
+
+.CityCard__forecast {
+  display: flex;
+  flex-direction: column;
+}
+.CityCard__forecast--scroll {
+  display: flex;
+  align-items: flex-start;
+  max-width: 300px;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+}
+.forecast__item {
+  text-align: center;
+  min-width: 110px;
+  margin: 0px 10px;
+  scroll-snap-align: start;
+}
+.forecast__item--header {
+  margin: 10px 0;
+}
+.forecast__item--card {
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: black;
+  padding: 15px 20px;
+}
+.forecast__item--icon {
+  width: 48px;
+  margin: 10px 0px;
+}
+.forecast__item--temp {
+  font-size: 20px;
+  font-weight: bold;
+}
