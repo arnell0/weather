@@ -1,7 +1,8 @@
 # weather
 
 A simple page for viewing the weather.
-https://arnell0.github.io/weather
+<br>
+Demo - https://arnell0.github.io/weather
 
 Data from the freemium API theRainery.com
 <br>
